@@ -1,9 +1,9 @@
-import Date from "./ShowDate";
+import ShowDate from "./ShowDate";
 const Header = () => {
     return (
         <>
             <h1>To Do List</h1>
-            <Date/>
+            <ShowDate/>
         </>
     )
 }
