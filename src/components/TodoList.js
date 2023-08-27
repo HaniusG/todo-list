@@ -5,14 +5,17 @@ const TodoList = () => {
         { text: "Drink Coffee", important: false},
         { text: "Learm React", important: false },
         { text: "Typescript", important: true },
-    ]
+        { text: "Learn Node Js", important: false },
+
+    ];
+
+    const data = items.map(({text, important})=> {
+     return (<TodoListItem text={text} important={important}/>)
+    })
 
     return (
       <ul >
-        <TodoListItem text={items[0].text} important={items[0].important}/>
-        <TodoListItem text={items[1].text} important={items[1].important}/>
-        <TodoListItem text={items[2].text} important={items[2].important}/>
-        <TodoListItem text={items[3].text} important={items[3].important}/>
+        {data}
       </ul>
     );
 
