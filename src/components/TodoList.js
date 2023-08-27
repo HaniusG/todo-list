@@ -1,8 +1,11 @@
+import List from "./List";
 const TodoList = () => {
+    
+
     return (
-      <ul>
-        <li>Learn JS</li>
-        <li>Learn React</li>
+      <ul >
+        <List/>
+        <List/>
         
       </ul>
     )
