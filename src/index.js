@@ -1,5 +1,5 @@
 import React from "react";
-import  ReactDOM  from "react-dom/client";
+import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Search from "./components/Search";
 import TodoList from "./components/TodoList";
@@ -13,18 +13,19 @@ const App = () => {
     { name: 'Sam', age: 28, status: false },
     { name: 'Ann', age: 24, status: true },
   ]
-  const data = users.map(({name, age, status})=>{
-    return <User name={name} age={age} status = {status}/>
-
-  }
-  )
 
   return (
     <div>
-      <Header/>
-      <Search/>
-      <TodoList/>
-      <ul>{data}</ul>
+      <Header />
+      <Search />
+      <TodoList />
+      <ul>{
+        users.map(({ name, age, status }) => {
+          return <User name={name} age={age} status={status} />
+        }
+        )
+
+      }</ul>
     </div>
   )
 }
@@ -32,4 +33,4 @@ const App = () => {
 
 const root = ReactDOM.createRoot(document.querySelector('#root'));
 
-root.render(<App/>);
+root.render(<App />);
