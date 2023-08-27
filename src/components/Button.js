@@ -3,3 +3,5 @@ const Button = ({text, color}) => {
         <button style={{color: {color}}}>{text}</button>
     )
 }
+
+export default Button;
