@@ -1,6 +1,6 @@
-const Button = ({text, color}) => {
+const Button = ({text, color = "black"}) => {
     return(
-        <button style={{color: color}}>{text}</button>
+        <button style={{ color }}>{text}</button>
     )
 }
 
