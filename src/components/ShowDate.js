@@ -1,7 +1,7 @@
-const ShowDate = () => {
+const ShowDate = ({text}) => {
     return (
-        <time>Last update: 23-Aug-2023</time>
+        <time dateTime="2023-08-12">{text}</time>
     )
-}
+};
 
 export default ShowDate;

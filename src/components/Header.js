@@ -6,7 +6,7 @@ const Header = () => {
         <div >
             
             <h1>To Do List</h1>
-            <ShowDate/>
+            <ShowDate text={'Publish date now'}/>
         </div>
     )
 }
