@@ -24,7 +24,7 @@ const App = () => {
       <Header/>
       <Search/>
       <TodoList/>
-      {data}
+      <ul>{data}</ul>
     </div>
   )
 }
