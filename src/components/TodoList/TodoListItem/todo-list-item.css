@@ -1,0 +1,40 @@
+.listItemDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonsDiv button{
+    margin:2px;
+    border: none;
+    border-radius: 3px;
+}
+
+
+.editButton{
+    background-color: rgb(216, 201, 72);
+    border: none;
+    color: black;
+}
+
+.editButton:hover{
+    background-color: rgb(192, 176, 40);
+}
+
+
+.impButton{
+    background-color: rgb(69, 125, 9);
+    color: white;
+}
+
+.impButton:hover{
+    opacity: 80%;
+}
+
+.dltButton{
+    background-color: rgb(150, 22, 22);
+    color: white;
+}
+
+.dltButton:Hover{
+    background-color: rgb(169, 34, 34);
+}
