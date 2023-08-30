@@ -5,10 +5,9 @@
 
 .header span{
     font-size: 10px;
-
 }
 
-.header {
+.header{
     display: flex;
     padding: 20px;
     margin: 0;
