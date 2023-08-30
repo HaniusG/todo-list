@@ -1,26 +1,27 @@
-.addDiv input{
-    margin-right:10px;
-    border: 2px solid rgb(202, 63, 13);
-    border-radius: 3px;
-}
-.addDiv input:focus{
-    background-color: rgb(255, 189, 108);
-}
-.addButton{
-    background-color: white;
-    color: rgb(202, 63, 13);
-    border: 2px solid rgb(202, 63, 13);
-    border-radius: 2px;
-    height: 20px;
+.additem {
+    padding: 10px 10px;
 }
 
-.addButton:hover{
-    background-color: rgb(202, 63, 13);
-    color: white;
+.additem input {
+    padding: 10px;
+    outline: none;
+    border: 1px solid #e5e5e5;
+    border-radius: 5px 0 0 5px;
+    width: 70%;
 }
 
-.addButton:active{
-    background-color: rgb(156, 42, 0);
-    color: white;
-    border: 2px solid rgb(156, 42, 0);
+.additem button {
+    padding: 11px;
+    border: none;
+    outline: none;
+    border-radius: 0 5px 5px 0;
+    width: 20%;
+    background-color: #25458b;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.additem button:hover {
+    background-color: #1a2e5b;
 }
