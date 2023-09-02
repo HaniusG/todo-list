@@ -3,12 +3,17 @@ import { FaTrash, FaInfo, FaCheck } from 'react-icons/fa6';
 
 const TodoListItem = ({ text, important }) => {
   const style = {
-    color: important ? "red" : "black"
+    color: important ? "red" : "black",
+    fontWeigth: important ? "bold" : "normal"
+
   }
 
   return (
     <li className='list-item' style={style}>
+      <span className='item-text'>
       {text}
+      </span>
+      
 
       <span className='item-btns'>
         <button className='item-btn-done'><FaCheck /></button>

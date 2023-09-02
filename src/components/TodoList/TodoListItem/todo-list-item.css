@@ -3,6 +3,8 @@
     display: block;
     padding: 7px 10px;
     border-bottom: 1px solid #e5e5e5;
+    clear: both;
+    height: 20px;
 }
 
 .list-item:first-child {
@@ -32,4 +34,13 @@
 
 .item-btns button:hover {
     background-color: #edffdc;
+}
+
+.item-text{
+    display: block;
+    float: left;
+}
+
+.item-text:hover{
+    cursor: pointer;
 }

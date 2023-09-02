@@ -1,12 +1,25 @@
+import { Component } from 'react'
 import './add-item.css';
 
-const AddItem = () => {
-  return (
-    <div className='additem'>
-      <input type="text" placeholder="Item text..." />
-      <button>Add item</button>
-    </div>
-  )
+class AddItem extends Component {
+
+  render() {
+    return (
+      <div className='additem'>
+        <input type="text" placeholder="Item text..." />
+        <button>Add item</button>
+      </div>
+    )
+  }
 }
+
+// const AddItem = () => {
+//   return (
+//     <div className='additem'>
+//       <input type="text" placeholder="Item text..." />
+//       <button>Add item</button>
+//     </div>
+//   )
+// }
 
 export default AddItem;
