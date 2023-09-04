@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Search from "./components/Search";
 import TodoList from "./components/TodoList";
 import AddItem from "./components/AddItem";
+import ErrorMessage from "./components/ErrorMessage";
 import "./index.css";
 
 const App = () => {
@@ -16,12 +17,16 @@ const App = () => {
   ];
 
   return (
+    <>
+    <ErrorMessage isErrorMessage={true} message="System Error"/>
     <div className="app">
+      
       <Header done ={0} important={2}/>
       <Search />
       <TodoList items={items} />
       <AddItem />
     </div>
+    </>
   );
 };
 

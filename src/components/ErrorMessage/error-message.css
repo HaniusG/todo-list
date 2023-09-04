@@ -1,0 +1,11 @@
+.errorMessage{
+    text-align: center;
+    border: 2px solid rgb(219, 24, 24);
+    background-color: rgb(204, 150, 150);
+}
+
+.infoMessage{
+    text-align: center;
+    border:2px solid rgb(205, 205, 8);
+    background-color: rgb(220, 225, 155);
+}

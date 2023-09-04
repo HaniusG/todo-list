@@ -7,17 +7,17 @@ class TodoListItem extends Component {
   state = {
     isDone: false,
     isImportant: this.props.important
-  }
+    }
 
   onDone = () => {
     this.setState({
-      isDone: this.state.isDone
+      isDone: !this.state.isDone
     })
   }
 
   onImportant = () =>{
     this.setState({
-    isImportant: !this.props.important
+    isImportant: !this.state.isImportant
     })
   }
 
