@@ -15,6 +15,15 @@
     background-color: #f8f8f8;
 }
 
+.item-text {
+    display: block;
+    float: left;
+}
+
+.item-text:hover {
+    cursor: pointer;
+}
+
 .item-btns {
     float: right;
 }
@@ -35,12 +44,7 @@
 .item-btns button:hover {
     background-color: #edffdc;
 }
-
-.item-text{
+.edit-input{
     display: block;
     float: left;
-}
-
-.item-text:hover{
-    cursor: pointer;
 }

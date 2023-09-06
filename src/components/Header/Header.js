@@ -1,30 +1,23 @@
-import './header.css';
 import { Component } from 'react';
 
+import './header.css';
+
 class Header extends Component {
+
   render() {
-    const {done, important} = this.props;
+    const { done, important } = this.props;
 
     return (
       <div className='header'>
-        <h1>My Todo List</h1>
-        <div><span>Done: {done}</span>
-          <br />
-          <span>Important: {important}</span></div>
+        <h1>
+          My Todo List
+          <span className='header-info'>
+            <span className='header-done'>Done: {done}</span>
+            <span className='header-done'>Important: {important}</span>
+          </span>
+        </h1>
       </div>
-    )
+    );
   }
 }
-
-// const Header = () => {
-//   return (
-//     <div className='header'>
-//       <h1>My Todo List</h1>
-//       <div><span>Done: 0</span>
-//         <br />
-//         <span>Important: 2</span></div>
-//     </div>
-//   );
-// }
-
 export default Header;
