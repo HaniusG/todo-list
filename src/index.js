@@ -22,7 +22,7 @@ class App extends Component {
   handleSearch = (text) => {
     this.setState(({items})=>{
       items.forEach(element => {
-        if(element.text.includes(text)){
+        if(element.text.toLowerCase().includes("React".toLowerCase())){
           console.log(element);
         }
       });
