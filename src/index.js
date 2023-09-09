@@ -16,19 +16,22 @@ class App extends Component {
       { text: "Learn TypeScript", important: true, id: 4 },
       { text: "Learn Node.js", important: false, id: 5 },
     ],
+    isSearched: false,
+    searchItems: []
   }
 
 
-  handleSearch = (text) => {
-    this.setState(({items})=>{
-      items.forEach(element => {
-        if(element.text.toLowerCase().includes("React".toLowerCase())){
-          console.log(element);
-        }
-      });
-  })}
+  handleSearch = (e) => {
+    const items1=this.state.items.filter((element)=> element.text.toLowerCase().includes(e.target.value.toLowerCase()))
+    this.setState(()=>{
+      return{
+        isSearched: true,
+        searchItems: items1
+      }
+  })
+}
 
-
+ 
   deleteItem = (id) => {
     this.setState(({items})=>{
       const idx = items.findIndex((el)=>el.id===id)
@@ -62,12 +65,13 @@ class App extends Component {
   }
 
   render () {
-    {this.handleSearch("jha")}
+  
     return (
       <div className="app">
+        
         <Header done={8} important={23} />
         <Search handleSearch={this.handleSearch}/>
-        <TodoList items={this.state.items} deleteItem={this.deleteItem} />
+        <TodoList items={this.state.isSearched ? this.state.searchItems : this.state.items} deleteItem={this.deleteItem} />
         <AddItem onAddItem={this.onAddItem} />
       </div>
     );
