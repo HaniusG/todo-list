@@ -18,6 +18,17 @@ class App extends Component {
     ],
   }
 
+
+  handleSearch = (text) => {
+    this.setState(({items})=>{
+      items.forEach(element => {
+        if(element.text.includes(text)){
+          console.log(element);
+        }
+      });
+  })}
+
+
   deleteItem = (id) => {
     this.setState(({items})=>{
       const idx = items.findIndex((el)=>el.id===id)
@@ -51,10 +62,11 @@ class App extends Component {
   }
 
   render () {
+    {this.handleSearch("jha")}
     return (
       <div className="app">
         <Header done={8} important={23} />
-        <Search />
+        <Search handleSearch={this.handleSearch}/>
         <TodoList items={this.state.items} deleteItem={this.deleteItem} />
         <AddItem onAddItem={this.onAddItem} />
       </div>
