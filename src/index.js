@@ -16,14 +16,64 @@ class App extends Component {
       { text: "Learn TypeScript", important: true, done: false, id: 4 },
       { text: "Learn Node.js", important: false, done: false, id: 5 },
     ],
-    isSearched: false,
     searchItems: [],
     doneItems: [],
-    importantItems: []
+    importantItems: [],
+    
+    isSearched: false,
+    isImportantClicked: false,
+    isDoneClicked: false,
+    isAllClicked: false,
   }
-  onImportant = () => {
-    this.setState()
 
+
+  handleAll = () => {
+    this.setState(()=>{
+      return{
+        isDoneClicked: false,
+        isImportantClicked: false,
+      }
+    })
+  }
+
+  onImportant = (id) => {
+    this.setState(({ items } )=>{
+      const idx = items.findIndex((el)=>el.id===id)
+     items[idx].important =  items[idx].done ? null: !items[idx].important
+    })
+  }
+
+  handleImportant = () => {
+    const items3= this.state.items.filter((element) => element.important===true)
+    console.log(items3);
+    this.setState(()=>{
+      return {
+        importantItems: items3,
+        isImportantClicked: true,
+        isAllClicked: false,
+        isDoneClicked: false,
+      }
+    })
+  }
+
+  onDone = (id) => {
+    this.setState(({ items } )=>{
+      const idx = items.findIndex((el)=>el.id===id);
+      items[idx].done = !items[idx].done;
+      items[idx].important  = false
+    })
+  }
+
+  handleDone = () => {
+    const items2= this.state.items.filter((element) => element.done===true)
+    this.setState(()=>{
+      return {
+        doneItems: items2,
+        isDoneClicked: true,
+        isImportantClicked: false,
+        isAllClicked: false,
+      }
+    })
   }
 
   handleSearch = (e) => {
@@ -36,18 +86,7 @@ class App extends Component {
     })
   }
 
-  handleDone = () => {
-    const items2= this.state.items.filter((element) => element.style.color="#FF0000")
-    console.log(items2);
-  }
-
-  handleImportant = () => {
-    const items3= this.state.items.filter((element) => element.important===true)
-    console.log(items3);
-  }
-
-
-
+  
   deleteItem = (id) => {
     this.setState(({ items }) => {
       const idx = items.findIndex((el) => el.id === id)
@@ -81,13 +120,24 @@ class App extends Component {
   }
  
   render() {
+    const {isSearched, searchItems, items, isImportantClicked, importantItems, isDoneClicked, doneItems} = this.state
 
     return (
   
       <div className="app">
         <Header done={8} important={23} />
-        <Search handleSearch={this.handleSearch} handleDone={this.handleDone} handleImportant={this.handleImportant}/>
-        <TodoList items={this.state.isSearched ? this.state.searchItems : this.state.items} deleteItem={this.deleteItem} />
+        <Search 
+        handleSearch={this.handleSearch} 
+        handleDone={this.handleDone} 
+        handleImportant={this.handleImportant}
+        handleAll={this.handleAll}
+        />
+        <TodoList 
+        items={isSearched ? searchItems : (isImportantClicked ? importantItems: (isDoneClicked ?  doneItems : items))} 
+        deleteItem={this.deleteItem} 
+        onImportant={this.onImportant}
+        onDone={this.onDone}
+        />
         <AddItem onAddItem={this.onAddItem} />
       </div>
     );

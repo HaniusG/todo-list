@@ -5,12 +5,32 @@ import './todo-list-item.css';
 
 class TodoListItem extends Component {
   state = {
-    isDone: false,
-    isImportant: this.props.important,
+    isDone: this.props.done,
     isEditing: false,
     text: this.props.text,
     isError: false,
+    isImportant: this.props.important
   }
+
+  onDone = () => {
+    this.props.onDone(this.props.id)
+    this.setState(({isDone})=>{
+      return{
+        isDone: !isDone,
+        isImportant: false
+      }
+    })
+  }
+
+  onImportant = () => {
+    this.props.onImportant(this.props.id)
+    this.setState(({ isImportant })=>{
+      return{
+        isImportant: !isImportant
+      }
+    })
+  }
+
 
   onEdit = () => {
     this.setState(({ isEditing, text}) => {
@@ -33,25 +53,16 @@ class TodoListItem extends Component {
     })
   }
 
-  onDone = () => {
-    this.setState({
-      isDone: !this.state.isDone
-    });
-  }
+  
 
   onDelete = () => {
     this.props.deleteItem(this.props.id)
   }
 
-  onImportant = () => {
-    this.setState({
-      isImportant: !this.state.isImportant
-    });
-  }
-
+  
   render() {
     const { isDone, isImportant, isEditing, text, isError } = this.state;
-
+    const { important } = this.props;
     const textStyle = {
       textDecoration: isDone ? 'line-through' : 'none',
       color: isDone ? '#aaa' : (isImportant ? 'red' : 'black'),
@@ -65,6 +76,7 @@ class TodoListItem extends Component {
 
 
     return (
+      
       <li className='list-item'>
 
         {
