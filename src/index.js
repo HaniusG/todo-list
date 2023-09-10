@@ -32,6 +32,7 @@ class App extends Component {
       return{
         isDoneClicked: false,
         isImportantClicked: false,
+        isSearched: false,
       }
     })
   }
@@ -45,13 +46,13 @@ class App extends Component {
 
   handleImportant = () => {
     const items3= this.state.items.filter((element) => element.important===true)
-    console.log(items3);
     this.setState(()=>{
       return {
         importantItems: items3,
         isImportantClicked: true,
         isAllClicked: false,
         isDoneClicked: false,
+        isSearched: false,
       }
     })
   }
@@ -72,6 +73,7 @@ class App extends Component {
         isDoneClicked: true,
         isImportantClicked: false,
         isAllClicked: false,
+        isSearched: false,
       }
     })
   }
