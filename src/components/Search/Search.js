@@ -4,19 +4,46 @@ import './search.css';
 
 export default class Search extends Component {
 
+  state = {
+    term: ''
+  }
 
+  buttons = [
+    { name: 'all', text: 'All', className: 'search-btn-all' },
+    { name: 'done', text: 'Done', className: 'search-btn-done' },
+    { name: 'important', text: 'Important', className: 'search-btn-important' }
+  ]
 
+  onSearchChange = (e) => {
+    this.setState({
+      term: e.target.value
+    })
 
+    this.props.onSearch(e.target.value)
+  }
 
   render() {
-    const {handleSearch, handleDone, handleImportant, handleAll} = this.props;
-    
     return (
-      <div className='search' >
-        <input type="text" placeholder="Type text for search..." onChange={handleSearch} />
-        <button className='search-btn-all' onClick={handleAll}>All</button>
-        <button className='search-btn-done' onClick={handleDone}>Done</button>
-        <button className='search-btn-important' onClick={handleImportant}>Important</button>
+      <div className='search'>
+        <input
+          type="text"
+          value={this.state.term}
+          onChange={this.onSearchChange}
+          placeholder="Type text for search..."
+        />
+        {
+          this.buttons.map(({ name, text, className }) => {
+            return (
+              <button
+                className={className}
+                key={name}
+                onClick={() => { this.props.onFilterChange(name) } }
+              >
+                {text}
+              </button>
+            )
+          })
+        }
       </div>
     );
   }

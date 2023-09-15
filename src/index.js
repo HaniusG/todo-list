@@ -16,102 +16,44 @@ class App extends Component {
       { text: "Learn TypeScript", important: true, done: false, id: 4 },
       { text: "Learn Node.js", important: false, done: false, id: 5 },
     ],
-    searchItems: [],
-    doneItems: [],
-    importantItems: [],
-    
-    isSearched: false,
-    isImportantClicked: false,
-    isDoneClicked: false,
-    isAllClicked: false,
+    term: '',
+    filter: 'all', // all, done, important
   }
 
+  onSearch = (term) => {
+    this.setState({ term })
+  }
 
-  handleAll = () => {
-    this.setState(()=>{
-      return{
-        isDoneClicked: false,
-        isImportantClicked: false,
-        isSearched: false,
-      }
+  handleSearch = (items, term) => {
+    if (term.trim().length === 0) {
+      return items;
+    }
+
+    return items.filter((item) => {
+      return item.text.toLowerCase().indexOf(term.toLowerCase()) > -1
     })
   }
 
-  onImportant = (id) => {
-    this.setState(({ items } )=>{
-      const idx = items.findIndex((el)=>el.id===id)
-     items[idx].important =  items[idx].done ? null: !items[idx].important
-    })
-  }
-
-  handleImportant = () => {
-    const items3= this.state.items.filter((element) => element.important===true)
-    this.setState(()=>{
-      return {
-        importantItems: items3,
-        isImportantClicked: true,
-        isAllClicked: false,
-        isDoneClicked: false,
-        isSearched: false,
-      }
-    })
-  }
-
-  onDone = (id) => {
-    this.setState(({ items } )=>{
-      const idx = items.findIndex((el)=>el.id===id);
-      items[idx].done = !items[idx].done;
-      items[idx].important  = false
-    })
-  }
-
-  handleDone = () => {
-    const items2= this.state.items.filter((element) => element.done===true)
-    this.setState(()=>{
-      return {
-        doneItems: items2,
-        isDoneClicked: true,
-        isImportantClicked: false,
-        isAllClicked: false,
-        isSearched: false,
-      }
-    })
-  }
-
-  handleSearch = (e) => {
-    const items1 = this.state.items.filter((element) => element.text.toLowerCase().includes(e.target.value.toLowerCase()))
-    this.setState(() => {
-      return {
-        isSearched: true,
-        searchItems: items1
-      }
-    })
-  }
-
-  
-  deleteItem = (id) => {
+  deletItem = (id) => {
     this.setState(({ items }) => {
       const idx = items.findIndex((el) => el.id === id)
-
+  
       return {
         items: [
           ...items.slice(0, idx),
           ...items.slice(idx + 1)
         ]
       }
-
     })
-
-
   }
 
   onAddItem = (text) => {
-    const id = this.state.items.length ? this.state.items[this.state.items.length - 1].id + 1 : 1;
+    const id = this.state.items.length ? this.state.items[this.state.items.length - 1].id + 1 : 1
 
     const newItem = {
       text,
       important: false,
-      id: id
+      id
     };
 
     this.setState((prevState) => {
@@ -120,25 +62,66 @@ class App extends Component {
       }
     })
   }
- 
-  render() {
-    const {isSearched, searchItems, items, isImportantClicked, importantItems, isDoneClicked, doneItems} = this.state
+
+  onDoneOrImp = (id, button) => {
+    this.setState(({ items }) => {
+      const idx = items.findIndex((el) => el.id === id)
+      let newItem = {};
+      if(button==="important"){
+        newItem = {
+          ...items[idx],
+          important: !items[idx].important
+        }
+      }else{
+        newItem = {
+          ...items[idx],
+          done: !items[idx].done
+        }
+      }
+      
+
+      return {
+        items: [
+          ...items.slice(0, idx),
+          newItem,
+          ...items.slice(idx + 1)
+        ]
+      }
+    })
+  }
+
+  onFilter = (items, filterBtn) => {
+    switch(filterBtn) {
+      case 'all':
+        return items;
+      case 'done':
+        return items.filter((el) => el.done)
+      case 'important':
+        return items.filter((el) => el.important && !el.done)
+      default:
+        return items
+    }
+  }
+
+  onFilterChange = (filter) => {
+    this.setState({ filter })
+  }
+
+  render () {
+    const { items, term, filter } = this.state;
+    const visibleItems = this.onFilter(this.handleSearch(items, term), filter)
+
+    const doneCount = items.filter((el) => el.done).length
+    const importantCount = items.filter((el) => el.important && !el.done).length
 
     return (
-  
       <div className="app">
-        <Header done={8} important={23} />
-        <Search 
-        handleSearch={this.handleSearch} 
-        handleDone={this.handleDone} 
-        handleImportant={this.handleImportant}
-        handleAll={this.handleAll}
-        />
-        <TodoList 
-        items={isSearched ? searchItems : (isImportantClicked ? importantItems: (isDoneClicked ?  doneItems : items))} 
-        deleteItem={this.deleteItem} 
-        onImportant={this.onImportant}
-        onDone={this.onDone}
+        <Header done={doneCount} important={importantCount} />
+        <Search onSearch={this.onSearch} onFilterChange={this.onFilterChange} />
+        <TodoList
+          items={visibleItems}
+          deletItem={this.deletItem}
+          onDoneOrImp={this.onDoneOrImp}
         />
         <AddItem onAddItem={this.onAddItem} />
       </div>

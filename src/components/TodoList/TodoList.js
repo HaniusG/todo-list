@@ -6,20 +6,21 @@ import "./todo-list.css";
 class TodoList extends Component {
 
   render() {
-    const { items, deleteItem, onImportant, onDone,} = this.props;
+    const { items, deletItem, onDoneOrImp} = this.props;
 
-    const data = items.map(({ text, important, id, done }) => {
+    const data = items.map(({ text, important, done, id }) => {
       return (
-      <TodoListItem 
-      text={text} 
-      important={important} 
-      done={done}
-      key={id} 
-      id={id}
-      deleteItem={deleteItem}
-      onImportant={onImportant}
-      onDone={onDone}
-      />);
+        <TodoListItem
+          text={text}
+          important={important}
+          key={id}
+          id={id}
+          deletItem={deletItem}
+          onDoneOrImp={onDoneOrImp}
+          
+          done={done}
+        />
+      );
     });
   
     return (

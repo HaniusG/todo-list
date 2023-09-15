@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import ErrorMessage from '../ErrorMessage'
-import { validateInput, createError } from '../../utils/validator';
+import { validateInput } from '../../utils/validator'
 
 import './add-item.css';
 
@@ -18,25 +18,32 @@ class AddItem extends Component {
   }
 
   onBtnClick = () => {
-    if(validateInput(this.state.inputValue)){
-      this.props.onAddItem(this.state.inputValue);
-      this.setState({inputValue: '', isError: false})
-      
-    }else{
-    this.setState({
-      isError: true
-    })
+    if (!validateInput(this.state.inputValue)) {
+      this.setState({ isError: true })
+      return
+    }
+
+    this.setState({ isError: false })
+    this.props.onAddItem(this.state.inputValue);
+    this.setState({inputValue: ''})
   }
-  }
-
-
-
 
   render() {
+    const { isError } = this.state;
+
     return (
       <div className='additem'>
-        { this.state.isError? <ErrorMessage message="You have not typed anything" type="error"/>: null}
-        <input type="text" value={this.state.inputValue} placeholder="Item text..." onChange={this.onInputChange} />
+
+        {
+          isError ? <ErrorMessage message="Error message text" type="error" /> : null
+        }
+
+        <input
+          type="text"
+          value={this.state.inputValue}
+          placeholder="Item text..."
+          onChange={this.onInputChange}
+        />
         <button onClick={this.onBtnClick}>Add item</button>
       </div>
     )
